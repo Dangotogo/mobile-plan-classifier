@@ -1,3 +1,15 @@
+# Project overview
+Megaline, a mobile carrier, wants to recommend updated mobile plans — Smart or Ultra — to users still on legacy plans. To achieve this, we’ll build a classification model using user behavior data to predict the most suitable plan.
+
+### The objective is to:
+
+- Predict the correct plan (Smart or Ultra) based on usage data.
+- Achieve at least 75% accuracy on the test set.
+- Evaluate different models and tune hyperparameters.
+- Validate the model with a sanity check to ensure logical performance.
+- This project uses preprocessed data and focuses on model development and evaluation.
+
+  
 ```python
 import pandas as pd
 import numpy as np
@@ -204,3 +216,11 @@ print(comparison)
     8   28.0   222.21      30.0  22986.30       0          0
     9   68.0   523.56      14.0  18910.66       0          0
 
+## Summary of Findings
+The objective of this project was to build a classification model to predict whether a mobile user should be on the Smart or Ultra plan based on usage data. Multiple models were evaluated, including Decision Tree, Random Forest, and Logistic Regression.
+
+The Random Forest classifier (50 estimators, max depth=10) achieved the best performance, with a validation accuracy of ~79.8% and a test accuracy of 79.94%. This represents a 10.4 percentage point improvement over the baseline dummy classifier, which achieved 69.52% by predicting the most frequent class.
+
+Class distribution analysis revealed a dataset imbalance: 69.5% Smart users versus 30.5% Ultra users. The model overpredicted Smart (78.7%) and underpredicted Ultra (21.3%), indicating a bias toward the majority class. Several Ultra users with high data and minute usage were misclassified as Smart, suggesting feature overlap between plans in the mid-to-high usage range.
+
+Overall, the Random Forest model met the target accuracy threshold but showed reduced sensitivity toward Ultra plan predictions. Future work should address class imbalance through reweighting or resampling, explore additional feature engineering, and consider advanced models such as gradient boosting to improve minority class detection.
